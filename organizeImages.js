@@ -1,14 +1,22 @@
-// Written by Zally, to help Zally
+/*
+    github.com/zallyy
+    Notes:
+     1. Images must contain no spaces
+     2. Images must be named [0-9][a-zA-z]
+     3. Might want to create a backup
+     4. Never have this folder inside the folder you want to change
+     5. No #4 because ALL FILES are affected not just img files.
+*/
 
-//Excute Bash Commands
 const { exec } = require('child_process')
 const path = require('path')
 const fs = require('fs')
 
+//Which folder do we want this to take place in
 const directoryPath = path.join(__dirname, '../assets/gallery')
-let files = fs.readdirSync(directoryPath)
 
 function DeleteMinExtensionImages() {
+    let files = fs.readdirSync(directoryPath)
     console.log("Deleting Min's ...")
     files.forEach((file, index) => {
         if (file.includes('min')) {
@@ -20,9 +28,11 @@ function DeleteMinExtensionImages() {
 
 function RenameImagesInOrder() {
     console.log('Renaming Images ...')
-    files = fs.readdirSync(directoryPath)
+    let files = fs.readdirSync(directoryPath)
+
+    //This top part is simply for the bottom part to work. Say they are already organized. It'll mess up my shitty code below.
     for (const [i, file] of files.entries()) {
-        let num = getRandomInt(100000, 1000000)
+        let num = getRandomInt(10000, 1000000)
         const dot = file.indexOf('.')
         const extension = file.slice(dot, file.length)
         fs.renameSync(`${directoryPath}/${file}`, `${directoryPath}/${num}${extension}`)
@@ -38,7 +48,7 @@ function RenameImagesInOrder() {
 
 function CreateNewMinImage() {
     console.log("Generating Min's ...")
-    files = fs.readdirSync(directoryPath)
+    let files = fs.readdirSync(directoryPath)
     for (const file of files) {
         const dot = file.indexOf('.')
         const fileName = file.slice(0, dot)
