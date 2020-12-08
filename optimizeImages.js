@@ -6,6 +6,10 @@
      3. Might want to create a backup
      4. Never have this folder inside the folder you want to change
      5. No #4 because ALL FILES are affected not just img files.
+
+     NOTE TO SELF > Go to folder 
+     ----------- Convert PNG to JPG ----------- 
+        $ ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"' > Then delete .png files rm *.png
 */
 
 const { exec } = require('child_process')
@@ -13,7 +17,7 @@ const path = require('path')
 const fs = require('fs')
 
 //Which folder do we want this to take place in
-const directoryPath = path.join(__dirname, '../assets/gallery')
+const directoryPath = path.join(__dirname, '../gallery')
 
 function DeleteMinExtensionImages() {
     let files = fs.readdirSync(directoryPath)
